@@ -1,0 +1,36 @@
+{
+  "header": {
+    "comment": "eric tasks file for project ericPyQt6",
+    "warning": "This file was generated automatically, do not edit.",
+    "saved": "2022-09-21, 14:58:33"
+  },
+  "ProjectScanFilter": "",
+  "Tasks": [
+    {
+      "summary": "WARNING: Any manual changes made to this file will be lost when pyuic6 is",
+      "description": "",
+      "priority": 1,
+      "lineno": 5,
+      "completed": false,
+      "created": 1663743437.0478277,
+      "type": 2,
+      "uid": "{aa1d7d40-c358-4f40-bd56-2485380c7e79}",
+      "parent_uid": "",
+      "expanded": false,
+      "filename": "D:\\zw_own\\PyQtBooks\\PyQt6-codes\\Chapter01\\ericProject\\Ui_testFirst.py"
+    },
+    {
+      "summary": "TODO: not implemented yet",
+      "description": "",
+      "priority": 1,
+      "lineno": 36,
+      "completed": false,
+      "created": 1663743437.0488281,
+      "type": 1,
+      "uid": "{d96d94dd-2c01-45cd-972c-f3c4ae85a8cf}",
+      "parent_uid": "",
+      "expanded": false,
+      "filename": "D:\\zw_own\\PyQtBooks\\PyQt6-codes\\Chapter01\\ericProject\\testFirst.py"
+    }
+  ]
+}
