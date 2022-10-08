@@ -39,9 +39,9 @@ def runMain():
     for uifile in list:
         pyfile = transPyFile(uifile)
         # pyqt6适用
-        # cmd = 'pyuic6 -o {pyfile} {uifile}'.format(pyfile=pyfile, uifile=uifile)
+        cmd = 'pyuic6 -o {pyfile} {uifile}'.format(pyfile=pyfile, uifile=uifile)
         # pyside6适用
-        cmd = 'pyside6-uic -o {pyfile} {uifile}'.format(pyfile=pyfile, uifile=uifile)
+        # cmd = 'pyside6-uic -o {pyfile} {uifile}'.format(pyfile=pyfile, uifile=uifile)
         # print(cmd)
         os.system(cmd)
 

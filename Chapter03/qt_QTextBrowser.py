@@ -4,6 +4,9 @@ from PyQt6.QtWidgets import (QApplication, QWidget,QMainWindow
 from PyQt6.QtCore import QUrl
 import urllib
 
+import os
+os.chdir(os.path.dirname(__file__))
+
 class TextBrowser(QMainWindow):
 
     def __init__(self):

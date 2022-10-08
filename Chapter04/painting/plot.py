@@ -42,10 +42,11 @@ import math
 import sys
 
 from PyQt6.QtWidgets import QWidget, QApplication
-from PyQt6.QtCore import QPoint, QRect, QTimer, Qt, Slot
-from PyQt6.QtGui import (QColor, QPainter, QPaintEvent, QPen, QPointList,
-                           QTransform)
+from PyQt6.QtCore import QPoint,QPointF, QRect, QTimer, Qt
+from PyQt6.QtCore import pyqtSlot as Slot
+from PyQt6.QtGui import (QColor, QPainter, QPaintEvent, QPen, QTransform)
 
+## todo 解决pyqt6绘制实时行情的问题。
 
 WIDTH = 680
 HEIGHT = 480
@@ -62,7 +63,8 @@ class PlotWidget(QWidget):
         self._timer.setInterval(20)
         self._timer.timeout.connect(self.shift)
 
-        self._points = QPointList()
+        # self._points = QPointList()
+        self._points =list()
         self._x = 0
         self._delta_x = 0.05
         self._half_height = HEIGHT / 2
@@ -82,17 +84,18 @@ class PlotWidget(QWidget):
 
     def shift(self):
         last_x = self._points[WIDTH - 1].x()
-        self._points.pop_front()
+        self._points.pop(0)
         self._points.append(QPoint(last_x + 1, self.next_point()))
         self.update()
 
     def paintEvent(self, event):
+        # for point in self._points:
         painter = QPainter()
         painter.begin(self)
         rect = QRect(QPoint(0, 0), self.size())
-        painter.fillRect(rect, Qt.white)
+        painter.fillRect(rect, Qt.GlobalColor.white)
         painter.translate(-self._points[0].x(), 0)
-        painter.drawPolyline(self._points)
+        painter.drawPolyline(*self._points)
         painter.end()
 
 
