@@ -1,7 +1,8 @@
 from PyQt6.QtWidgets import QApplication, QWidget, QTextEdit, QVBoxLayout, QPushButton
 from PyQt6.QtGui import QColor,QFont
 import sys
-
+import os
+os.chdir(os.path.dirname(__file__))
 
 class TextEditDemo(QWidget):
     def __init__(self, parent=None):

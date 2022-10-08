@@ -53,7 +53,8 @@ from PyQt6.QtGui import QAction, QKeySequence, QIcon
 from PyQt6.QtWidgets import (QApplication, QDockWidget, QLabel,
                                QLineEdit, QMainWindow, QToolBar)
 from PyQt6.QtWebEngineCore import QWebEngineDownloadRequest, QWebEnginePage
-
+import os
+os.chdir(os.path.dirname(__file__))
 main_windows = []
 
 

@@ -6,7 +6,8 @@
 """
 import sys
 from PyQt6.QtWidgets import *
-
+import os
+os.chdir(os.path.dirname(__file__))
 
 
 class MainWindow(QMainWindow):

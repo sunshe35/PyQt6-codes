@@ -4,7 +4,8 @@ from qtpandas.models.DataFrameModel import DataFrameModel
 from qtpandas.views.DataTableView import DataTableWidget
 
 import pandas as pd
-
+import os
+os.chdir(os.path.dirname(__file__))
 class qtpandasDemo(QMainWindow):
 
     def __init__(self, parent=None):
