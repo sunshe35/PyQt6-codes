@@ -9,7 +9,8 @@ from PyQt6.QtWidgets import *
 from PyQt6.QtGui import *
 from PyQt6.QtCore import *
 from functools import partial
-
+import os
+os.chdir(os.path.dirname(__file__))
 
 
 item_list = ["C", "C++", "Java", "Python", "JavaScript", "C#", "Swift", "go", "Ruby", "Lua", "PHP"]

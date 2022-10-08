@@ -11,7 +11,8 @@ import sys
 from PyQt6.QtCore import *
 from PyQt6.QtGui import *
 from PyQt6.QtWidgets import QToolButton,QMainWindow,QVBoxLayout,QHBoxLayout,QApplication,QWidget,QToolBar,QMenu,QLabel
-
+import os
+os.chdir(os.path.dirname(__file__))
 
 class ToolButtonDemo(QMainWindow):
 

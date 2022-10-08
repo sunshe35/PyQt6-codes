@@ -10,7 +10,8 @@ import sys
 from PyQt6.QtWidgets import *
 from PyQt6.QtCore import *
 from PyQt6.QtGui import *
-
+import os
+os.chdir(os.path.dirname(__file__))
 
 class WinStyleDemo(QMainWindow):
     def __init__(self, parent=None):

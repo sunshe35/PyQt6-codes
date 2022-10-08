@@ -9,7 +9,8 @@ import sys
 from PyQt6.QtWidgets import QMainWindow, QApplication,QPushButton,QWidget,QHBoxLayout,QVBoxLayout
 from PyQt6.QtGui import QIcon,QGuiApplication
 from PyQt6 import QtCore
-
+import os
+os.chdir(os.path.dirname(__file__))
 
 class MainWidget(QMainWindow):
     def __init__(self, parent=None):
