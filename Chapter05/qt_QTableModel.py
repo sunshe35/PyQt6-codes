@@ -190,8 +190,8 @@ class QTableViewDemo(QMainWindow):
         self.buttonInsertRow.clicked.connect(self.onInsert)
         self.buttonDeleteRow.clicked.connect(self.onDelete)
 
-
-        self.model.setData(self.model.index(3, 1), 'Python', role=Qt.EditRole)
+        self.model.setData(self.model.index(3, 1), 'Python',
+                           role=Qt.ItemDataRole.EditRole)
 
         layout = QVBoxLayout(self)
         layout.addWidget(self.tableView)
