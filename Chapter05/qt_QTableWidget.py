@@ -2,7 +2,8 @@ from PyQt6.QtWidgets import *
 from PyQt6.QtGui import *
 from PyQt6.QtCore import *
 import sys
-
+import os
+os.chdir(os.path.dirname(__file__))
 
 class QTableWidgetDemo(QMainWindow):
     addCount = 0

@@ -49,7 +49,8 @@ from PyQt6.QtWidgets import (QApplication, QCheckBox, QComboBox, QGridLayout,
         QLabel, QSpinBox, QWidget)
 
 # import basicdrawing_rc
-
+import os
+os.chdir(os.path.dirname(__file__))
 
 class RenderArea(QWidget):
     points = QPolygon([

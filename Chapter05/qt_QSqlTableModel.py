@@ -3,7 +3,8 @@ from PyQt6.QtGui import *
 from PyQt6.QtCore import *
 from PyQt6.QtSql import QSqlDatabase, QSqlTableModel
 import sys
-
+import os
+os.chdir(os.path.dirname(__file__))
 
 class QTableViewDemo(QMainWindow):
 

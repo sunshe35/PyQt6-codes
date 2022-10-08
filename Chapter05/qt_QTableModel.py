@@ -7,7 +7,8 @@ import random
 # from PyQt6.QtCore import pyqtSignal as SIGNAL
 
 from PyQt6.QtCore import pyqtBoundSignal as SignalEmit
-
+import os
+os.chdir(os.path.dirname(__file__))
 SUBJECT, NAME, SCORE, DESCRIPTION = range(4)
 
 

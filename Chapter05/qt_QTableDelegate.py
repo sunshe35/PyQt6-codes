@@ -7,7 +7,8 @@ import datetime
 # from PyQt6.QtGui import PYQT_SIGNAL as SIGNAL
 from PyQt6.QtCore import pyqtSignal as SIGNAL
 from qt_QTableModel import StudentTableModel
-
+import os
+os.chdir(os.path.dirname(__file__))
 SUBJECT, NAME, SCORE, DESCRIPTION = range(4)
 
 

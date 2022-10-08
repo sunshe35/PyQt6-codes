@@ -2,7 +2,8 @@ from PyQt6.QAxContainer import QAxWidget
 from PyQt6.QtWidgets import QWidget, QVBoxLayout, QPushButton, QFileDialog, QMessageBox, QMainWindow
 from PyQt6.QtGui import QIcon, QAction
 from PyQt6.QtCore import Qt
-
+import os
+os.chdir(os.path.dirname(__file__))
 class AxWidget(QMainWindow):
 
     def __init__(self, *args, **kwargs):

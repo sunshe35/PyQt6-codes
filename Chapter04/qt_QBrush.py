@@ -11,7 +11,8 @@ import sys
 from PyQt6.QtWidgets import *
 from PyQt6.QtGui import *
 from PyQt6.QtCore import *
-
+import os
+os.chdir(os.path.dirname(__file__))
 
 class BrushDemo(QWidget):
     def __init__(self):

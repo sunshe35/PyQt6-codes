@@ -9,7 +9,8 @@ from PyQt6.QtWidgets import (QApplication, QFileDialog, QMainWindow,
         QMdiArea, QMessageBox, QTextEdit, QWidget)
 
 # import mdi_rc
-
+import os
+os.chdir(os.path.dirname(__file__))
 
 class MdiChild(QTextEdit):
     sequence_number = 1

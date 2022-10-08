@@ -4,7 +4,8 @@ from PyQt6.QtCore import *
 from PyQt6.QtSql import QSqlDatabase, QSqlTableModel, QSqlRecord, QSqlQuery
 import sys
 import random
-
+import os
+os.chdir(os.path.dirname(__file__))
 
 def createRelationalTables():
 
