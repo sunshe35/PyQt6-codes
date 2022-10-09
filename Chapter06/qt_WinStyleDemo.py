@@ -152,7 +152,7 @@ class WinStyleDemo(QMainWindow):
         self.setStyle(QMainWindow().style())
         self.setStyleSheet('')
         self.setPalette(QMainWindow().palette())
-        self.paintEvent = QMainWindow.paintEvent
+        self.paintEvent = QMainWindow().paintEvent
         # button = self.buttonGroup.buttons()[-1]
         # if button.text() == 'paintEvent' and not button.isChecked():
         #     self.paintEvent = QMainWindow.paintEvent
