@@ -32,7 +32,8 @@ import sys
 from PyQt6.QtGui import QGuiApplication
 from PyQt6.QtQml import QQmlApplicationEngine
 from PyQt6.QtCore import QUrl, QObject, pyqtSignal as Signal,pyqtSlot as Slot,pyqtProperty as Property
-
+import os
+os.chdir(os.path.dirname(__file__))
 
 #region number-generator
 class NumberGenerator(QObject):
@@ -43,6 +44,7 @@ class NumberGenerator(QObject):
     
     # number
     numberChanged = Signal(int)
+    maxNumberChanged = Signal()
 
     @Slot()
     def updateNumber(self):
@@ -58,10 +60,10 @@ class NumberGenerator(QObject):
     
     number = Property(int, get_number, notify=numberChanged)
 
-    # maxNumber
-    @Signal
-    def maxNumberChanged(self):
-        pass
+    # # maxNumber
+    # @Signal
+    # def maxNumberChanged(self):
+    #     pass
 
     @Slot(int)
     def setMaxNumber(self, val):

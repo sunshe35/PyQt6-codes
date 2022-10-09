@@ -44,7 +44,7 @@ from bookmarkwidget import BookmarkWidget
 from webengineview import WebEngineView
 from historywindow import HistoryWindow
 from PyQt6 import QtCore
-from PyQt6.QtCore import Qt, QUrl
+from PyQt6.QtCore import Qt, QUrl,pyqtSignal as Signal
 from PyQt6.QtWidgets import QMenu, QTabBar, QTabWidget
 from PyQt6.QtWebEngineCore import QWebEngineDownloadRequest, QWebEnginePage
 
@@ -52,9 +52,9 @@ from PyQt6.QtWebEngineCore import QWebEngineDownloadRequest, QWebEnginePage
 class BrowserTabWidget(QTabWidget):
     """Enables having several tabs with QWebEngineView."""
 
-    url_changed = QtCore.Signal(QUrl)
-    enabled_changed = QtCore.Signal(QWebEnginePage.WebAction, bool)
-    download_requested = QtCore.Signal(QWebEngineDownloadRequest)
+    url_changed = Signal(QUrl)
+    enabled_changed = Signal(QWebEnginePage.WebAction, bool)
+    download_requested = Signal(QWebEngineDownloadRequest)
 
     def __init__(self, window_factory_function):
         super().__init__()
@@ -69,8 +69,9 @@ class BrowserTabWidget(QTabWidget):
             self._actions_enabled[web_action] = False
 
         tab_bar = self.tabBar()
-        tab_bar.setSelectionBehaviorOnRemove(QTabBar.SelectPreviousTab)
-        tab_bar.setContextMenuPolicy(Qt.CustomContextMenu)
+        tab_bar.setSelectionBehaviorOnRemove(
+            QTabBar.SelectionBehavior.SelectPreviousTab)
+        tab_bar.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
         tab_bar.customContextMenuRequested.connect(self._handle_tab_context_menu)
 
     def add_browser_tab(self):
@@ -141,31 +142,31 @@ class BrowserTabWidget(QTabWidget):
                 self._check_emit_enabled_changed(web_action, enabled)
 
     def back(self):
-        self._trigger_action(QWebEnginePage.Back)
+        self._trigger_action(QWebEnginePage.WebAction.Back)
 
     def forward(self):
-        self._trigger_action(QWebEnginePage.Forward)
+        self._trigger_action(QWebEnginePage.WebAction.Forward)
 
     def reload(self):
-        self._trigger_action(QWebEnginePage.Reload)
+        self._trigger_action(QWebEnginePage.WebAction.Reload)
 
     def undo(self):
-        self._trigger_action(QWebEnginePage.Undo)
+        self._trigger_action(QWebEnginePage.WebAction.Undo)
 
     def redo(self):
-        self._trigger_action(QWebEnginePage.Redo)
+        self._trigger_action(QWebEnginePage.WebAction.Redo)
 
     def cut(self):
-        self._trigger_action(QWebEnginePage.Cut)
+        self._trigger_action(QWebEnginePage.WebAction.Cut)
 
     def copy(self):
-        self._trigger_action(QWebEnginePage.Copy)
+        self._trigger_action(QWebEnginePage.WebAction.Copy)
 
     def paste(self):
-        self._trigger_action(QWebEnginePage.Paste)
+        self._trigger_action(QWebEnginePage.WebAction.Paste)
 
     def select_all(self):
-        self._trigger_action(QWebEnginePage.SelectAll)
+        self._trigger_action(QWebEnginePage.WebAction.SelectAll)
 
     def show_history(self):
         index = self.currentIndex()
@@ -177,7 +178,7 @@ class BrowserTabWidget(QTabWidget):
                 history_window = HistoryWindow(history, self)
                 history_window.open_url.connect(self.load)
                 history_window.setWindowFlags(history_window.windowFlags()
-                                              | Qt.Window)
+                                              | Qt.WindowType.Window)
                 history_window.setWindowTitle('History')
                 self._history_windows[webengineview] = history_window
             else:

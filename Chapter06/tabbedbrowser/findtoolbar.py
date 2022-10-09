@@ -39,7 +39,7 @@
 #############################################################################
 
 from PyQt6 import QtCore
-from PyQt6.QtCore import Qt
+from PyQt6.QtCore import Qt, pyqtSignal as Signal
 from PyQt6.QtGui import QIcon, QKeySequence
 from PyQt6.QtWidgets import QCheckBox, QLineEdit, QToolBar, QToolButton
 from PyQt6.QtWebEngineCore import QWebEnginePage
@@ -48,7 +48,7 @@ from PyQt6.QtWebEngineCore import QWebEnginePage
 # A Find tool bar (bottom area)
 class FindToolBar(QToolBar):
 
-    find = QtCore.Signal(str, QWebEnginePage.FindFlags)
+    find = Signal(str, QWebEnginePage.FindFlag)
 
     def __init__(self):
         super().__init__()
@@ -74,7 +74,7 @@ class FindToolBar(QToolBar):
         self.addWidget(self._case_sensitive_checkbox)
 
         self._hideButton = QToolButton()
-        self._hideButton.setShortcut(QKeySequence(Qt.Key_Escape))
+        self._hideButton.setShortcut(QKeySequence(Qt.Key.Key_Escape))
         self._hideButton.setIcon(QIcon(style_icons + 'closedock-16.png'))
         self._hideButton.clicked.connect(self.hide)
         self.addWidget(self._hideButton)
@@ -84,12 +84,14 @@ class FindToolBar(QToolBar):
 
     def _emit_find(self, backward):
         needle = self._line_edit.text().strip()
+        # from enum import Flag
+        
         if needle:
-            flags = QWebEnginePage.FindFlags()
+            flags = QWebEnginePage.FindFlag(0)
             if self._case_sensitive_checkbox.isChecked():
-                flags |= QWebEnginePage.FindCaseSensitively
+                flags |= QWebEnginePage.FindFlag.FindCaseSensitively
             if backward:
-                flags |= QWebEnginePage.FindBackward
+                flags |= QWebEnginePage.FindFlag.FindBackward
             self.find.emit(needle, flags)
 
     def _find_next(self):

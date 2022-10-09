@@ -31,6 +31,8 @@ import sys
 from PyQt6.QtGui import QGuiApplication
 from PyQt6.QtQml import QQmlApplicationEngine
 from PyQt6.QtCore import QUrl
+import os
+os.chdir(os.path.dirname(__file__))
 
 if __name__ == '__main__':
     app = QGuiApplication(sys.argv)

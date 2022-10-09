@@ -43,11 +43,11 @@ import os
 import warnings
 
 from PyQt6 import QtCore
-from PyQt6.QtCore import QDir, QFileInfo, QStandardPaths, Qt, QUrl
+from PyQt6.QtCore import QDir, QFileInfo, QStandardPaths, Qt, QUrl,pyqtSignal as Signal
 from PyQt6.QtGui import QIcon, QStandardItem, QStandardItemModel
 from PyQt6.QtWidgets import QMenu, QMessageBox, QTreeView
 
-_url_role = Qt.UserRole + 1
+_url_role = Qt.ItemDataRole.UserRole + 1
 
 # Default bookmarks as an array of arrays which is the form
 # used to read from/write to a .json bookmarks file
@@ -64,7 +64,8 @@ _default_bookmarks = [
 
 
 def _config_dir():
-    location = QStandardPaths.writableLocation(QStandardPaths.ConfigLocation)
+    location = QStandardPaths.writableLocation(
+        QStandardPaths.StandardLocation.ConfigLocation)
     return f'{location}/QtForPythonBrowser'
 
 
@@ -73,13 +74,13 @@ _bookmark_file = 'bookmarks.json'
 
 def _create_folder_item(title):
     result = QStandardItem(title)
-    result.setFlags(Qt.ItemIsEnabled | Qt.ItemIsSelectable)
+    result.setFlags(Qt.ItemFlag.ItemIsEnabled | Qt.ItemFlag.ItemIsSelectable)
     return result
 
 
 def _create_item(url, title, icon):
     result = QStandardItem(title)
-    result.setFlags(Qt.ItemIsEnabled | Qt.ItemIsSelectable)
+    result.setFlags(Qt.ItemFlag.ItemIsEnabled | Qt.ItemFlag.ItemIsSelectable)
     result.setData(url, _url_role)
     if icon is not None:
         result.setIcon(icon)
@@ -131,9 +132,9 @@ def _serialize_model(model, directory):
 class BookmarkWidget(QTreeView):
     """Provides a tree view to manage the bookmarks."""
 
-    open_bookmark = QtCore.Signal(QUrl)
-    open_bookmark_in_new_tab = QtCore.Signal(QUrl)
-    changed = QtCore.Signal()
+    open_bookmark = Signal(QUrl)
+    open_bookmark_in_new_tab = Signal(QUrl)
+    changed = Signal()
 
     def __init__(self):
         super().__init__()
@@ -236,8 +237,8 @@ class BookmarkWidget(QTreeView):
     def _remove_item(self, item):
         message = f"Would you like to remove \"{item.text()}\"?"
         button = QMessageBox.question(self, "Remove", message,
-                                      QMessageBox.Yes | QMessageBox.No)
-        if button == QMessageBox.Yes:
+                                      QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No)
+        if button == QMessageBox.StandardButton.Yes:
             item.parent().removeRow(item.row())
 
     def write_bookmarks(self):

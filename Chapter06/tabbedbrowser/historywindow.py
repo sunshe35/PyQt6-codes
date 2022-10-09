@@ -40,7 +40,7 @@
 
 from PyQt6.QtWidgets import QApplication, QTreeView
 
-from PyQt6.QtCore import Signal, QAbstractTableModel, QModelIndex, Qt, QUrl
+from PyQt6.QtCore import pyqtSignal as Signal, QAbstractTableModel, QModelIndex, Qt, QUrl
 
 
 class HistoryModel(QAbstractTableModel):
@@ -49,8 +49,8 @@ class HistoryModel(QAbstractTableModel):
         super().__init__(parent)
         self._history = history
 
-    def headerData(self, section, orientation, role=Qt.DisplayRole):
-        if orientation == Qt.Horizontal and role == Qt.DisplayRole:
+    def headerData(self, section, orientation, role=Qt.ItemDataRole.DisplayRole):
+        if orientation == Qt.Orientation.Horizontal and role == Qt.ItemDataRole.DisplayRole:
             return 'Title' if section == 0 else 'Url'
         return None
 
@@ -63,10 +63,10 @@ class HistoryModel(QAbstractTableModel):
     def item_at(self, model_index):
         return self._history.itemAt(model_index.row())
 
-    def data(self, index, role=Qt.DisplayRole):
+    def data(self, index, role=Qt.ItemDataRole.DisplayRole):
         item = self.item_at(index)
         column = index.column()
-        if role == Qt.DisplayRole:
+        if role == Qt.ItemDataRole.DisplayRole:
             return item.title() if column == 0 else item.url().toString()
         return None
 

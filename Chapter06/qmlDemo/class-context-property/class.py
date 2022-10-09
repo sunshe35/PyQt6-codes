@@ -32,7 +32,8 @@ import sys
 from PyQt6.QtGui import QGuiApplication
 from PyQt6.QtQml import QQmlApplicationEngine
 from PyQt6.QtCore import QUrl, QObject, pyqtSignal as Signal,pyqtSlot as Slot
-
+import os
+os.chdir(os.path.dirname(__file__))
 
 class NumberGenerator(QObject):
     def __init__(self):

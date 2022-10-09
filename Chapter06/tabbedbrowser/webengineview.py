@@ -40,19 +40,19 @@
 
 from PyQt6.QtWebEngineCore import QWebEnginePage
 from PyQt6.QtWebEngineWidgets import QWebEngineView
-
+from PyQt6.QtCore import pyqtSignal as Signal
 from PyQt6 import QtCore
 
-_web_actions = [QWebEnginePage.Back, QWebEnginePage.Forward,
-                QWebEnginePage.Reload,
-                QWebEnginePage.Undo, QWebEnginePage.Redo,
-                QWebEnginePage.Cut, QWebEnginePage.Copy,
-                QWebEnginePage.Paste, QWebEnginePage.SelectAll]
+_web_actions = [QWebEnginePage.WebAction.Back, QWebEnginePage.WebAction.Forward,
+                QWebEnginePage.WebAction.Reload,
+                QWebEnginePage.WebAction.Undo, QWebEnginePage.WebAction.Redo,
+                QWebEnginePage.WebAction.Cut, QWebEnginePage.WebAction.Copy,
+                QWebEnginePage.WebAction.Paste, QWebEnginePage.WebAction.SelectAll]
 
 
 class WebEngineView(QWebEngineView):
 
-    enabled_changed = QtCore.Signal(QWebEnginePage.WebAction, bool)
+    enabled_changed = Signal(QWebEnginePage.WebAction, bool)
 
     @staticmethod
     def web_actions():
@@ -81,8 +81,8 @@ class WebEngineView(QWebEngineView):
         return self.page().action(web_action).isEnabled()
 
     def createWindow(self, window_type):
-        if (window_type == QWebEnginePage.WebBrowserTab or
-            window_type == QWebEnginePage.WebBrowserBackgroundTab):
+        if (window_type == QWebEnginePage.WebWindowType.WebBrowserTab or
+            window_type == QWebEnginePage.WebWindowType.WebBrowserBackgroundTab):
             return self._tab_factory_func()
         return self._window_factory_func()
 

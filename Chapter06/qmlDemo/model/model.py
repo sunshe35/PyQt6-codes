@@ -33,10 +33,12 @@ import sys
 from PyQt6.QtGui import QGuiApplication
 from PyQt6.QtQml import QQmlApplicationEngine, qmlRegisterType
 from PyQt6.QtCore import Qt, QUrl, QTimer, QAbstractListModel
+import os
+os.chdir(os.path.dirname(__file__))
 
 class CpuLoadModel(QAbstractListModel):
-    def __init__(self):
-        QAbstractListModel.__init__(self)
+    def __init__(self,parent=None):
+        QAbstractListModel.__init__(self, parent)
         
         self.__cpu_count = psutil.cpu_count()
         self.__cpu_load = [0] * self.__cpu_count

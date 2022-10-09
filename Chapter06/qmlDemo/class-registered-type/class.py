@@ -31,12 +31,14 @@ import random
 import sys
 
 from PyQt6.QtGui import QGuiApplication
-from PyQt6.QtQml import QQmlApplicationEngine, qmlRegisterType
+from PyQt6.QtQml import QQmlApplicationEngine, qmlRegisterType,QQmlComponent,QQmlEngine
 from PyQt6.QtCore import QUrl, QObject, pyqtSignal as Signal, pyqtSlot as Slot
+import os
+os.chdir(os.path.dirname(__file__))
 
 class NumberGenerator(QObject):
-    def __init__(self):
-        QObject.__init__(self)
+    def __init__(self,parent=None):
+        QObject.__init__(self,parent)
     
     nextNumber = Signal(int, arguments=['number'])
 
@@ -47,11 +49,11 @@ class NumberGenerator(QObject):
 
 if __name__ == '__main__':
     app = QGuiApplication(sys.argv)
-    engine = QQmlApplicationEngine()
     
     qmlRegisterType(NumberGenerator, 'Generators', 1, 0, 'NumberGenerator')
     
-    engine.load(QUrl("main.qml"))
+    engine = QQmlApplicationEngine()
+    engine.load("main.qml")
 
 
     if not engine.rootObjects():
