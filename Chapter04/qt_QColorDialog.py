@@ -88,10 +88,10 @@ class DialogOptionsWidget(QWidget):
         self.checkBoxList.append((checkBox, value))
 
     def value(self):
-        result = 0
-        for checkbox_tuple in self.checkBoxList:
-            if checkbox_tuple[0].isChecked():
-                result = result | checkbox_tuple[1]
+        result = QColorDialog.ColorDialogOption.DontUseNativeDialog # default
+        for checkBox_tuple in self.checkBoxList:
+            if checkBox_tuple[0].isChecked():
+                result |=  checkBox_tuple[1]
         return result
 
 
