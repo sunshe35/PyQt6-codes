@@ -29,9 +29,12 @@ class ColorDlg(QDialog):
 
         # 颜色选项
         self.colorDialogOptionsWidget = DialogOptionsWidget()
-        self.colorDialogOptionsWidget.addCheckBox("使用Qt对话框(非系统)", QColorDialog.ColorDialogOption.DontUseNativeDialog)
-        self.colorDialogOptionsWidget.addCheckBox("显示透明度alpha", QColorDialog.ColorDialogOption.ShowAlphaChannel)
-        self.colorDialogOptionsWidget.addCheckBox("不显示buttons", QColorDialog.ColorDialogOption.NoButtons)
+        self.colorDialogOptionsWidget.addCheckBox(
+            "使用Qt对话框(非系统)", QColorDialog.ColorDialogOption.DontUseNativeDialog)
+        self.colorDialogOptionsWidget.addCheckBox(
+            "显示透明度alpha", QColorDialog.ColorDialogOption.ShowAlphaChannel)
+        self.colorDialogOptionsWidget.addCheckBox(
+            "不显示buttons", QColorDialog.ColorDialogOption.NoButtons)
         layout.addWidget(self.colorDialogOptionsWidget)
 
         # 自定义颜色设置
@@ -43,15 +46,18 @@ class ColorDlg(QDialog):
         index_list = [2, 3, 4, 5]
         for i in range(len(item_list)):
             self.combobox.addItem(item_list[i], index_list[i])
-        self.combobox.activated.connect(lambda: self.on_activate(self.combobox))
+        self.combobox.activated.connect(
+            lambda: self.on_activate(self.combobox))
         layout.addWidget(self.combobox)
 
     def setColor(self):
         options = self.colorDialogOptionsWidget.value()
         if options:
-            color = QColorDialog.getColor(Qt.GlobalColor.green, self, "Select Color", options)
+            color = QColorDialog.getColor(
+                Qt.GlobalColor.green, self, "Select Color", options)
         else:
-            color = QColorDialog.getColor(Qt.GlobalColor.green, self, "Select Color")
+            color = QColorDialog.getColor(
+                Qt.GlobalColor.green, self, "Select Color")
         if color.isValid():
             self.colorLabel.setText(color.name())
             self.colorLabel.setPalette(QPalette(color))
@@ -61,7 +67,8 @@ class ColorDlg(QDialog):
         color = QColor(combobox.currentText())
         index = combobox.currentData()
         QColorDialog.setCustomColor(index, color)
-        self.label2.setText('QColorDialog在位置{} 已经添加自定义颜色{}'.format(index, combobox.currentText()))
+        self.label2.setText('QColorDialog在位置{} 已经添加自定义颜色{}'.format(
+            index, combobox.currentText()))
         self.label2.setPalette(QPalette(color))
         self.label2.setAutoFillBackground(True)
 
@@ -84,8 +91,9 @@ class DialogOptionsWidget(QWidget):
         result = 0
         for checkbox_tuple in self.checkBoxList:
             if checkbox_tuple[0].isChecked():
-                result = checkbox_tuple[1]
+                result = result | checkbox_tuple[1]
         return result
+
 
 
 if __name__ == '__main__':
