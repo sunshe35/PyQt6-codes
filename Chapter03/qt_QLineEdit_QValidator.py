@@ -50,8 +50,18 @@ class lineEditDemo(QWidget):
         pDoubleLineEdit.setValidator(pDoubleValidator)
         pValidatorLineEdit.setValidator(pValidator)
 
+        # QDoubleValidator无法限制QLineEdit数据输入大小，因此这里手动添加限制。
+        pDoubleLineEdit.textChanged[str].connect(
+            lambda x: self.input_validate(x, pDoubleValidator, pDoubleLineEdit))
+        self.last_text = ''
+
         self.setLayout(flo)
 
+    def input_validate(self,text, pDoubleValidator, pDoubleLineEdit):
+        if float(text) > pDoubleValidator.top() or float(text) < pDoubleValidator.bottom():
+            pDoubleLineEdit.setText(self.last_text)
+        else:
+            self.last_text =text
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
