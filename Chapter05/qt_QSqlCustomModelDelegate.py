@@ -229,17 +229,16 @@ class SqlQueryModelDemo(QWidget):
 
     # 设置上下文菜单
     def generateMenu(self):
+        # 对于pyqt6.6版本，slot函数必须在shortcut后面。如果之前版本(pyqt<6.6)运行出错，请把slot函数调整到shortcut前面
         menu = QMenu(self)
-        menu.addAction(QIcon("images/up.png"), '第一页', self.onFirstButtonClick, QKeySequence(Qt.Modifier.CTRL | Qt.Key.Key_F))
-        menu.addAction(QIcon("images/left.png"), '前一页', self.onPrevButtonClick, QKeySequence(Qt.Modifier.CTRL | Qt.Key.Key_P))
-        menu.addAction(QIcon("images/right.png"), '后一页', self.onNextButtonClick, QKeySequence(Qt.Modifier.CTRL | Qt.Key.Key_N))
-        menu.addAction(QIcon("images/down.png"), '最后一页', self.onLastButtonClick, QKeySequence(Qt.Modifier.CTRL | Qt.Key.Key_L))
+        menu.addAction(QIcon("images/up.png"), '第一页', QKeySequence(Qt.Modifier.CTRL | Qt.Key.Key_F), self.onFirstButtonClick)
+        menu.addAction(QIcon("images/left.png"), '前一页', QKeySequence(Qt.Modifier.CTRL | Qt.Key.Key_P), self.onPrevButtonClick)
+        menu.addAction(QIcon("images/right.png"), '后一页', QKeySequence(Qt.Modifier.CTRL | Qt.Key.Key_N), self.onNextButtonClick)
+        menu.addAction(QIcon("images/down.png"), '最后一页', QKeySequence(Qt.Modifier.CTRL | Qt.Key.Key_L), self.onLastButtonClick)
         menu.addSeparator()
-        menu.addAction('全选', lambda: self.tableView.selectAll(), QKeySequence(Qt.Modifier.CTRL | Qt.Key.Key_A))
-        menu.addAction('选择行', lambda: self.tableView.selectRow(self.tableView.currentIndex().row()),
-                       QKeySequence(Qt.Modifier.CTRL | Qt.Key.Key_R))
-        menu.addAction('选择列', lambda: self.tableView.selectColumn(self.tableView.currentIndex().column()),
-                       QKeySequence(Qt.Modifier.CTRL | Qt.Modifier.SHIFT | Qt.Key.Key_R))
+        menu.addAction('全选', QKeySequence(Qt.Modifier.CTRL | Qt.Key.Key_A), lambda: self.tableView.selectAll())
+        menu.addAction('选择行',QKeySequence(Qt.Modifier.CTRL | Qt.Key.Key_R), lambda: self.tableView.selectRow(self.tableView.currentIndex().row()))
+        menu.addAction('选择列',QKeySequence(Qt.Modifier.CTRL | Qt.Modifier.SHIFT | Qt.Key.Key_R), lambda: self.tableView.selectColumn(self.tableView.currentIndex().column()))
         return menu
 
     def showMenu(self, pos):

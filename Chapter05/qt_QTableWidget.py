@@ -224,18 +224,19 @@ class QTableWidgetDemo(QMainWindow):
 
 
     def generateMenu(self):
+        # 对于pyqt6.6版本，slot函数必须在shortcut后面。如果之前版本(pyqt<6.6)运行出错，请把slot函数调整到shortcut前面
         menu = QMenu(self)
-        menu.addAction('增加行', lambda: self.onAdd('row'), QKeySequence(Qt.Modifier.CTRL | Qt.Key.Key_N))
-        menu.addAction('插入行', lambda: self.onInsert('row'), QKeySequence(Qt.Modifier.CTRL | Qt.Key.Key_I))
-        menu.addAction(QIcon("images/close.png"), '删除行', lambda: self.onDelete('row'), QKeySequence(Qt.Modifier.CTRL | Qt.Key.Key_D))
+        menu.addAction('增加行', QKeySequence(Qt.Modifier.CTRL | Qt.Key.Key_N), lambda: self.onAdd('row'))
+        menu.addAction('插入行', QKeySequence(Qt.Modifier.CTRL | Qt.Key.Key_I), lambda: self.onInsert('row'))
+        menu.addAction(QIcon("images/close.png"), '删除行', QKeySequence(Qt.Modifier.CTRL | Qt.Key.Key_D), lambda: self.onDelete('row'))
         menu.addSeparator()
-        menu.addAction('增加列', lambda: self.onAdd('column'), QKeySequence(Qt.Modifier.CTRL|Qt.Modifier.SHIFT | Qt.Key.Key_N))
-        menu.addAction('插入列', lambda: self.onInsert('column'), QKeySequence(Qt.Modifier.CTRL|Qt.Modifier.SHIFT | Qt.Key.Key_I))
-        menu.addAction(QIcon("images/close.png"), '删除列', lambda: self.onDelete('column'), QKeySequence(Qt.Modifier.CTRL|Qt.Modifier.SHIFT | Qt.Key.Key_D))
+        menu.addAction('增加列', QKeySequence(Qt.Modifier.CTRL|Qt.Modifier.SHIFT | Qt.Key.Key_N), lambda: self.onAdd('column'))
+        menu.addAction('插入列', QKeySequence(Qt.Modifier.CTRL|Qt.Modifier.SHIFT | Qt.Key.Key_I), lambda: self.onInsert('column'))
+        menu.addAction(QIcon("images/close.png"), '删除列', QKeySequence(Qt.Modifier.CTRL|Qt.Modifier.SHIFT | Qt.Key.Key_D), lambda: self.onDelete('column'))
         menu.addSeparator()
-        menu.addAction('全选', lambda: self.tableWidget.selectAll(), QKeySequence(Qt.Modifier.CTRL | Qt.Key.Key_A))
-        menu.addAction('选择行', lambda: self.tableWidget.selectRow(self.tableWidget.currentRow()), QKeySequence(Qt.Modifier.CTRL | Qt.Key.Key_R))
-        menu.addAction('选择列', lambda: self.tableWidget.selectColumn(self.tableWidget.currentColumn()), QKeySequence(Qt.Modifier.CTRL |Qt.Modifier.SHIFT| Qt.Key.Key_R))
+        menu.addAction('全选', QKeySequence(Qt.Modifier.CTRL | Qt.Key.Key_A), lambda: self.tableWidget.selectAll())
+        menu.addAction('选择行', QKeySequence(Qt.Modifier.CTRL | Qt.Key.Key_R), lambda: self.tableWidget.selectRow(self.tableWidget.currentRow()))
+        menu.addAction('选择列', QKeySequence(Qt.Modifier.CTRL |Qt.Modifier.SHIFT| Qt.Key.Key_R), lambda: self.tableWidget.selectColumn(self.tableWidget.currentColumn()))
         menu.addAction('输出选择', self.onButtonSelectOutput)
         menu.addSeparator()
         menu.addAction(self.actionHelp)

@@ -87,13 +87,14 @@ class QListViewDemo(QWidget):
 
 
     def generateMenu(self):
+        # 对于pyqt6.6版本，slot函数必须在shortcut后面。如果之前版本(pyqt<6.6)运行出错，请把slot函数调整到shortcut前面
         menu = QMenu(self)
-        menu.addAction('增加',self.onAdd,QKeySequence(Qt.Modifier.CTRL|Qt.Key.Key_N))
-        menu.addAction('插入',self.onInsert,QKeySequence(Qt.Modifier.CTRL|Qt.Key.Key_I))
-        menu.addAction(QIcon("images/close.png"),'删除',self.onDelete,QKeySequence(Qt.Modifier.CTRL|Qt.Key.Key_D))
+        menu.addAction('增加',QKeySequence(Qt.Modifier.CTRL|Qt.Key.Key_N),self.onAdd)
+        menu.addAction('插入',QKeySequence(Qt.Modifier.CTRL|Qt.Key.Key_I),self.onInsert)
+        menu.addAction(QIcon("images/close.png"),'删除',QKeySequence(Qt.Modifier.CTRL|Qt.Key.Key_D),self.onDelete)
         menu.addSeparator()
-        menu.addAction('全选',self.onSelectAll,QKeySequence(Qt.Modifier.CTRL|Qt.Key.Key_A))
-        menu.addAction('清空选择',self.onSelectClear,QKeySequence(Qt.Modifier.CTRL|Qt.Key.Key_R))
+        menu.addAction('全选',QKeySequence(Qt.Modifier.CTRL|Qt.Key.Key_A), self.onSelectAll)
+        menu.addAction('清空选择',QKeySequence(Qt.Modifier.CTRL|Qt.Key.Key_R),self.onSelectClear)
         menu.addAction('输出选择',self.onSelectOutput)
         menu.addSeparator()
         # menu.addAction(self.actionHelp)
