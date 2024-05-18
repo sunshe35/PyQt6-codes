@@ -135,6 +135,19 @@ class SqlQueryModelDemo(QWidget):
         menu.addAction(QIcon("images/up.png"), '第一页', QKeySequence(Qt.Modifier.CTRL | Qt.Key.Key_F), self.onFirstButtonClick)
         menu.addAction(QIcon("images/left.png"), '前一页', QKeySequence(Qt.Modifier.CTRL | Qt.Key.Key_P), self.onPrevButtonClick)
         menu.addAction(QIcon("images/right.png"), '后一页', QKeySequence(Qt.Modifier.CTRL | Qt.Key.Key_N), self.onNextButtonClick)
+        
+        # next = QAction(QIcon("images/right.png"),'后一页',self)
+        # next.triggered.connect(self.onNextButtonClick)
+        # next.setShortcut(QKeySequence(Qt.Modifier.CTRL|Qt.Key.Key_N))
+        # menu.addAction(next)
+        
+        
+        # menu.addAction(QIcon("images/right.png"), '后一页', QKeySequence(Qt.Modifier.CTRL | Qt.Key.Key_N), self.onNextButtonClick)
+        # short_next = QShortcut(QKeySequence("Ctrl+N"),self)
+        # short_next.activated.connect(self.onNextButtonClick)
+        
+        
+        # menu.addAction(QIcon("images/right.png"), '后一页', QKeySequence('Ctrl+N'), self.onNextButtonClick)
         menu.addAction(QIcon("images/down.png"), '最后一页', QKeySequence(Qt.Modifier.CTRL | Qt.Key.Key_L), self.onLastButtonClick)
         menu.addSeparator()
         menu.addAction('全选', QKeySequence(Qt.Modifier.CTRL | Qt.Key.Key_A), lambda: self.tableView.selectAll())
