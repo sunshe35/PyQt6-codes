@@ -2,7 +2,7 @@ import sys
 from PyQt6.QtWidgets import (QApplication, QWidget,QMainWindow
 , QLineEdit, QTextBrowser, QPushButton, QVBoxLayout, QHBoxLayout,QFrame,QLabel)
 from PyQt6.QtCore import QUrl
-import urllib
+import urllib.parse
 
 import os
 os.chdir(os.path.dirname(__file__))
@@ -21,7 +21,7 @@ class TextBrowser(QMainWindow):
         self.textBrowser = QTextBrowser()
         self.textBrowser.setAcceptRichText(True)
         self.textBrowser.setOpenExternalLinks(True)
-        self.textBrowser.setSource(QUrl(r'.\support\textBrowser.html'))
+        self.textBrowser.setSource(QUrl(r'./support/textBrowser.html'))
         self.textBrowser.anchorClicked.connect(lambda url:self.statusBar().showMessage('你点击了url'+urllib.parse.unquote(url.url()),3000))
         self.textBrowser.historyChanged.connect(self.show_anchor)
 
